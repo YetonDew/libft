@@ -1,19 +1,26 @@
 #include <stdio.h>
-#include <string.h>
-#include "ft_strlen.c"
-#include "ft_memcpy.c"
+#include "libft.h"
 
-size_t ft_strlcpy(char *dst, const char *src, size_t size) {
-    size_t srclen = ft_strlen(src);
-
-    if (size > 0) {
-        size_t copylen = (srclen >= size) ? size - 1 : srclen;
-        ft_memcpy(dst, src, copylen);
-        dst[copylen] = '\0';
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+    size_t  srclen;
+    size_t	copylen;
+    srclen = ft_strlen(src);
+    if (size > 0)
+    {
+	    if (srclen >= size)
+	    {
+		    copylen = size - 1;
+	    }
+	    else
+	    {
+		    copylen = srclen;
+	    }
+	    ft_memcpy(dst, src, copylen);
+	    dst[copylen] = '\0';
     }
-    return srclen;
+    return (srclen);
 }
-
 int main() {
     char destino[10];
     const char *origen = "HolaMundo!";
