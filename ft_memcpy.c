@@ -1,4 +1,6 @@
-void * ft_memcpy(void *restrict dst, const void *restrict src, size_t len)
+#include "libft.h"
+
+void * ft_memcpy(void * dst, const void * src, size_t len)
 {
     size_t i;
     unsigned char *ptr_dst;

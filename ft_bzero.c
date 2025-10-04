@@ -1,3 +1,5 @@
+#include "libft.h"
+
 void ft_bzero(void *str, size_t len)
 {
     char *ptr;
@@ -9,4 +11,4 @@ void ft_bzero(void *str, size_t len)
     {
         ptr[i++] = 0;
     }
-}   
+}
