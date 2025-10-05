@@ -6,7 +6,7 @@
 /*   By: ajeffers <ajeffers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 21:04:35 by ajeffers          #+#    #+#             */
-/*   Updated: 2025/10/05 14:52:23 by ajeffers         ###   ########.fr       */
+/*   Updated: 2025/10/05 17:57:17 by ajeffers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int ft_atoi(const char *str)
 	res = 0;
 	i = 0;
 	sign = 1;
-	while(str[i] == ' ')
+	while(str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[0] == '-')
 	{
