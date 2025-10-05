@@ -6,7 +6,7 @@
 /*   By: ajeffers <ajeffers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:24:22 by ajeffers          #+#    #+#             */
-/*   Updated: 2025/09/30 18:24:08 by ajeffers         ###   ########.fr       */
+/*   Updated: 2025/10/05 14:40:00 by ajeffers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 		return (size + src_len);
 	free_space = size - dst_len - 1;
 	i = 0;
-	while (dst[i] && free_space < size)
+	while (src[i] && i < free_space)
 	{
 		dst[dst_len + i] = src[i];
 		i++;
