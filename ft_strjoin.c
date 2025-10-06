@@ -1,41 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajeffers <ajeffers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/04 21:04:35 by ajeffers          #+#    #+#             */
-/*   Updated: 2025/10/05 22:07:07 by ajeffers         ###   ########.fr       */
+/*   Created: 2025/10/06 15:16:51 by ajeffers          #+#    #+#             */
+/*   Updated: 2025/10/06 21:14:35 by ajeffers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_atoi(const char *str)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int	res;
-	int	i;
-	int	sign;
+	size_t	s1_len;
+	size_t	s2_len;
+	char	*new_str;
 
-	res = 0;
-	i = 0;
-	sign = 1;
-	while(str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if (str[i] == '-')
-	{
-		sign = -1;
-		i++;
-	}
-	else if (str[i] == '+')
-		i++;
-	while (str[i] != '\0')
-	{
-		if (str[i] < '0' || str[i] > '9')
-			break;
-		res = res * 10 + (str[i] - '0');
-		i++;
-	}
-	return (sign * res);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	new_str = malloc((s1_len + s2_len + 1) * sizeof(char));
+	if (new_str == NULL)
+		return (NULL);
+	ft_memcpy(new_str, s1, s1_len);
+	ft_memcpy(new_str + s1_len, s2, s2_len);
+	new_str[s1_len + s2_len] = '\0';
+	return (new_str);
 }
