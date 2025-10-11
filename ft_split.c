@@ -5,71 +5,74 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajeffers <ajeffers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 21:24:07 by ajeffers          #+#    #+#             */
-/*   Updated: 2025/10/07 09:41:20 by ajeffers         ###   ########.fr       */
+/*   Created: 2025/10/07 16:09:54 by ajeffers          #+#    #+#             */
+/*   Updated: 2025/10/11 12:53:56 by ajeffers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* Cuenta cuántas palabras hay en la cadena */
 static size_t	count_words(char const *s, char c)
 {
-	size_t	count;
+	size_t	counter;
 
-	count = 0;
+	counter = 0;
 	while (*s)
 	{
-		while (*s == c && *s)
+		while (*s == c)
 			s++;
 		if (*s)
 		{
-			count++;
+			counter++;
 			while (*s && *s != c)
 				s++;
 		}
 	}
-	return (count);
+	return (counter);
 }
 
-/* Libera memoria si algo falla */
-static void	*free_all(char **arr, size_t i)
+static void free_split(char **res, size_t i)
 {
-	while (i > 0)
-		free(arr[--i]);
-	free(arr);
-	return (NULL);
+    while (i > 0)
+        free(res[--i]);
+    free(res);
+}
+
+static char **logic(char **res, size_t *i, char const *s, char c)
+{
+    size_t start = 0, end;
+
+    while (s[start]) {
+        while (s[start] == c) start++;
+        if (!s[start]) break;
+        end = start;
+        while (s[end] && s[end] != c) end++;
+
+        res[*i] = ft_substr(s, start, end - start);
+        if (!res[*i]) {
+            free_split(res, *i);
+            return NULL;
+        }
+        (*i)++;
+        start = end;
+    }
+    res[*i] = NULL;
+    return res;
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**res;
-	size_t	start;
-	size_t	end;
-	size_t	i;
+	char **res;
+	size_t i;
+	size_t count;
 
-	if (!s)
+	if (s == NULL)
 		return (NULL);
-	res = malloc(sizeof(char *) * (count_words(s, c) + 1));
-	if (!res)
+	count = count_words(s, c);
+	res = (char **)malloc((count + 1) * (sizeof(char *)));
+	if (res == NULL)
 		return (NULL);
 	i = 0;
-	start = 0;
-	while (s[start])
-	{
-		while (s[start] == c)
-			start++;
-		if (!s[start])
-			break ;
-		end = start;
-		while (s[end] && s[end] != c)
-			end++;
-		res[i] = ft_substr(s, start, end - start);
-		if (!res[i])
-			return (free_all(res, i));
-		i++;
-		start = end;
-	}
-	res[i] = NULL;
+	res = logic(res, &i, s, c);
 	return (res);
 }
